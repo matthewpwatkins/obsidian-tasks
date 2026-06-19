@@ -4,16 +4,30 @@ Standalone TypeScript library and CLI that parses [Obsidian Tasks](https://publi
 
 Built by [Matthew Watkins](https://www.watkins.dev/).
 
+## Why this exists
+
+The [Obsidian Tasks plugin](https://publish.obsidian.md/tasks) stores tasks as plain markdown on disk — but **query results are not**. Tasks query blocks in your vault are only query *definitions*; the plugin evaluates them in JavaScript when Obsidian renders the note. On the filesystem you see filters like `not done` and `sort by urgency`, not the matching task lines.
+
+That works fine inside Obsidian. It breaks down for everything else:
+
+- **Scripts and cron jobs** cannot read "what's due today" without reimplementing the query engine.
+- **`grep`, git, and CI** see query source, not answers.
+- **AI agents and automation** can edit task lines but cannot evaluate dashboards, urgency ordering, blocked-task graphs, or dynamic dates like `today`.
+
+This package closes that gap. It parses the Tasks emoji task format, executes the query language your vault actually uses, and prints materialized markdown to stdout — without mutating your source files. Tasks stay where you wrote them (area files, project notes, daily notes); automation reads the same `TASKS.md` query blocks you use in Obsidian, with `today` and date math resolved at execution time.
+
+Typical uses: render a vault dashboard from the shell, sync completed tasks into daily notes on file save, nightly completion logging, and building agent or MCP tooling on top of a real library API.
+
 ## Install
 
 ```bash
-npm install -g @mpwatkins/obsidian-tasks
+npm install -g @watkins-dev/obsidian-tasks
 ```
 
 Or use locally in a project:
 
 ```bash
-npm install @mpwatkins/obsidian-tasks
+npm install @watkins-dev/obsidian-tasks
 ```
 
 ## Setup (development)
@@ -48,7 +62,7 @@ obsidian-tasks log-completions --catch-up --vault /path/to/vault
 ## Library
 
 ```typescript
-import { scanVault, queryTasks, renderTasksToMarkdown } from '@mpwatkins/obsidian-tasks';
+import { scanVault, queryTasks, renderTasksToMarkdown } from '@watkins-dev/obsidian-tasks';
 
 const tasks = await scanVault({ vaultRoot: '/path/to/vault' });
 const result = queryTasks(tasks, 'not done\nsort by urgency desc', { today: '2026-06-18' });

@@ -1,5 +1,5 @@
 {
-  "name": "@mpwatkins/obsidian-tasks",
+  "name": "@watkins-dev/obsidian-tasks",
   "version": "0.1.0",
   "description": "Parse and execute Obsidian Tasks plugin queries outside Obsidian",
   "type": "module",
