@@ -12,9 +12,10 @@
     }
   },
   "bin": {
-    "obsidian-tasks": "./dist/cli.js"
+    "obsidian-tasks": "./bin/obsidian-tasks.js"
   },
   "files": [
+    "bin",
     "dist",
     "LICENSE",
     "README.md"
