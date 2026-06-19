@@ -1,0 +1,62 @@
+{
+  "name": "@mpwatkins/obsidian-tasks",
+  "version": "0.1.0",
+  "description": "Parse and execute Obsidian Tasks plugin queries outside Obsidian",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "obsidian-tasks": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "author": "Matthew Watkins <https://www.watkins.dev/>",
+  "homepage": "https://www.watkins.dev/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewpwatkins/obsidian-tasks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matthewpwatkins/obsidian-tasks/issues"
+  },
+  "keywords": [
+    "obsidian",
+    "obsidian-tasks",
+    "tasks",
+    "markdown",
+    "pkm",
+    "cli"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
+}
