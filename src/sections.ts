@@ -85,9 +85,11 @@ function extractExistingSnapshotLines(lines: string[]): string[] {
 }
 
 function buildTasksSectionLines(userLines: string[], snapshotLines: string[]): string[] {
-  const parts = [...userLines];
+  const parts: string[] = [];
+  if (userLines.length > 0 || snapshotLines.length > 0) parts.push('');
+  parts.push(...userLines);
   if (snapshotLines.length > 0) {
-    if (parts.length > 0) parts.push('');
+    if (userLines.length > 0) parts.push('');
     parts.push(...snapshotLines);
   }
   if (parts.length > 0) parts.push('');

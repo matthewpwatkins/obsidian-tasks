@@ -64,4 +64,18 @@ describe('injectCompletionLog', () => {
     expect(isLoggedSnapshotLine('- [x] Laundry ([[Areas/Chores]])')).toBe(true);
     expect(isLoggedSnapshotLine('- [x] Done here ✅ 2026-06-18')).toBe(false);
   });
+
+  it('keeps a blank line between the ## Tasks heading and the first task', () => {
+    const updated = injectCompletionLog(
+      `## Tasks
+- [ ] One thing
+
+## Journal
+`,
+      ['- [x] Old ✅ 2026-06-18 ([[Areas/A]])'],
+    );
+    expect(updated).toContain('## Tasks\n\n- [ ] One thing');
+    // idempotent: a second sync must not add or remove blank lines
+    expect(injectCompletionLog(updated, ['- [x] Old ✅ 2026-06-18 ([[Areas/A]])'])).toBe(updated);
+  });
 });
