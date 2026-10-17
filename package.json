@@ -1,6 +1,6 @@
 {
   "name": "@watkins-dev/obsidian-tasks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Parse and execute Obsidian Tasks plugin queries outside Obsidian",
   "type": "module",
   "main": "./dist/index.js",
